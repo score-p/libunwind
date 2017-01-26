@@ -161,7 +161,7 @@ typedef ucontext_t unw_tdep_context_t;
      support UNW_LOCAL_ONLY.  */
 # define unw_tdep_getcontext            getcontext
 #else
-# define unw_tdep_getcontext            UNW_ARCH_OBJ (getcontext)
+# define unw_tdep_getcontext            UNW_ARCH_OBJ(getcontext)
   extern int unw_tdep_getcontext (unw_tdep_context_t *);
 #endif
 

@@ -57,7 +57,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 #define x86_64_lock                     UNW_OBJ(lock)
 #define x86_64_local_resume             UNW_OBJ(local_resume)
 #define x86_64_local_addr_space_init    UNW_OBJ(local_addr_space_init)
-#define setcontext                      UNW_ARCH_OBJ (setcontext)
+#define setcontext                      UNW_ARCH_OBJ(setcontext)
 #if 0
 #define x86_64_scratch_loc              UNW_OBJ(scratch_loc)
 #endif

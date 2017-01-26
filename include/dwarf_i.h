@@ -16,7 +16,7 @@
 #endif
 
 #ifndef dwarf_to_unw_regnum
-# define dwarf_to_unw_regnum_map                UNW_OBJ (dwarf_to_unw_regnum_map)
+# define dwarf_to_unw_regnum_map                UNW_OBJ(dwarf_to_unw_regnum_map)
 extern const uint8_t dwarf_to_unw_regnum_map[DWARF_REGNUM_MAP_LENGTH];
 /* REG is evaluated multiple times; it better be side-effects free!  */
 # define dwarf_to_unw_regnum(reg)                                         \
