@@ -100,7 +100,7 @@ ia64_find_unwind_table (struct elf_dyn_info *edi, unw_addr_space_t as,
   Elf64_Ehdr *ehdr;
   int i;
 
-  if (!_Uelf64_valid_object (&edi->ei))
+  if (!elf_w (valid_object) (&edi->ei))
     return -UNW_ENOINFO;
 
   ehdr = edi->ei.image;
