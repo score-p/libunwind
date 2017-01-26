@@ -16,7 +16,10 @@ check_PROGRAMS_common = test-proc-info test-static-link \
 			test-strerror
 check_SCRIPTS_arch =
 check_SCRIPTS_cdep =
-check_SCRIPTS_common =	run-check-namespace
+check_SCRIPTS_common =
+if !EMBEDDED
+check_SCRIPTS_common +=	run-check-namespace
+endif
 
 if REMOTE_ONLY
 
