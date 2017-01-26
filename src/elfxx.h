@@ -32,14 +32,16 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 
 #include "libunwind_i.h"
 
+
+
 #if ELF_CLASS == ELFCLASS32
 # define ELF_W(x)       ELF32_##x
 # define Elf_W(x)       Elf32_##x
-# define elf_w(x)       _Uelf32_##x
+# define elf_w(fn)      UNW_PASTE(_Uelf32_, fn)
 #else
 # define ELF_W(x)       ELF64_##x
 # define Elf_W(x)       Elf64_##x
-# define elf_w(x)       _Uelf64_##x
+# define elf_w(fn)      UNW_PASTE(_Uelf64_, fn)
 #endif
 
 extern int elf_w (get_proc_name) (unw_addr_space_t as,
