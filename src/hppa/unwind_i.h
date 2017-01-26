@@ -36,7 +36,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 #define hppa_local_resume               UNW_OBJ(local_resume)
 #define hppa_local_addr_space_init      UNW_OBJ(local_addr_space_init)
 #define hppa_scratch_loc                UNW_OBJ(scratch_loc)
-#define setcontext                      UNW_ARCH_OBJ (setcontext)
+#define setcontext                      UNW_ARCH_OBJ(setcontext)
 
 extern void hppa_local_addr_space_init (void);
 extern int hppa_local_resume (unw_addr_space_t as, unw_cursor_t *cursor,
