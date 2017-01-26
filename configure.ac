@@ -449,13 +449,15 @@ if test "x$LATEX2MAN" = "x"; then
 fi
 
 AM_CONDITIONAL([CONFIG_DOCS], [test x$enable_documentation = xyes])
+AC_CONFIG_FILES(doc/Makefile)
 if test "x$enable_documentation" = "xyes"; then
-  AC_CONFIG_FILES(doc/Makefile doc/common.tex)
+  AC_CONFIG_FILES(doc/common.tex)
 fi
 
 AM_CONDITIONAL([CONFIG_TESTS], [test x$enable_tests = xyes])
+AC_CONFIG_FILES(tests/Makefile)
 if test "x$enable_tests" = "xyes"; then
-  AC_CONFIG_FILES(tests/Makefile tests/check-namespace.sh)
+  AC_CONFIG_FILES(tests/check-namespace.sh)
 fi
 
 AM_CONDITIONAL([CONFIG_WEAK_BACKTRACE], [test "x$enable_weak_backtrace" = xyes])
