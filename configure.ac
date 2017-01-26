@@ -160,6 +160,13 @@ AC_MSG_RESULT([$enable_unwind_header])
 AC_MSG_CHECKING([if we should build libunwind-setjmp])
 AC_MSG_RESULT([$enable_setjmp])
 
+AC_ARG_ENABLE([embedded],
+	      [AS_HELP_STRING([--enable-embedded],
+			      [Enable embedded support (i.e., do not install anything) @<:@default=no@:>@])
+	      ],
+	      [],
+	      [enable_embedded=no])
+
 AC_MSG_CHECKING([for build architecture])
 AC_MSG_RESULT([$build_arch])
 AC_MSG_CHECKING([for host architecture])
@@ -442,6 +449,8 @@ AC_SUBST(enable_debug_frame)
 AC_SUBST(DLLIB)
 AC_SUBST(BACKTRACELIB)
 
+AM_CONDITIONAL([EMBEDDED], [test "x$enable_embedded" = xyes])
+
 AC_PATH_PROG([LATEX2MAN],[latex2man])
 if test "x$LATEX2MAN" = "x"; then
   AC_MSG_WARN([latex2man not found. Install latex2man. Disabling docs.])
@@ -456,7 +465,8 @@ fi
 
 AM_CONDITIONAL([CONFIG_TESTS], [test x$enable_tests = xyes])
 AC_CONFIG_FILES(tests/Makefile)
-if test "x$enable_tests" = "xyes"; then
+if test "x$enable_tests" = "xyes" && test "x$enable_embedded" != xyes; then
+  # does only work with installed libs (and shared objects, tdb)
   AC_CONFIG_FILES(tests/check-namespace.sh)
 fi
 
@@ -468,7 +478,14 @@ AM_COND_IF([CONFIG_WEAK_BACKTRACE], [
 AC_CONFIG_FILES(Makefile src/Makefile
                 include/libunwind-common.h
                 include/libunwind.h include/tdep/libunwind_i.h)
-AC_CONFIG_FILES(src/unwind/libunwind.pc src/coredump/libunwind-coredump.pc
-                src/ptrace/libunwind-ptrace.pc src/setjmp/libunwind-setjmp.pc
-                src/libunwind-generic.pc)
+AM_COND_IF([EMBEDDED], [], [
+    AC_CONFIG_FILES([src/unwind/libunwind.pc src/libunwind-generic.pc])
+    AM_COND_IF([BUILD_COREDUMP], [
+        AC_CONFIG_FILES([src/coredump/libunwind-coredump.pc])])
+    AM_COND_IF([BUILD_PTRACE], [
+        AC_CONFIG_FILES([src/ptrace/libunwind-ptrace.pc])])
+    AM_COND_IF([BUILD_SETJMP], [
+        AC_CONFIG_FILES([src/setjmp/libunwind-setjmp.pc])])
+])
+
 AC_OUTPUT
