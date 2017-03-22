@@ -32,6 +32,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 
 #include "libunwind_i.h"
 
+static int mi_munmap (void *addr, size_t len);
+
 #if ELF_CLASS == ELFCLASS32
 # define ELF_W(x)       ELF32_##x
 # define Elf_W(x)       Elf32_##x
@@ -93,7 +95,7 @@ elf_map_image (struct elf_image *ei, const char *path)
 
   if (!elf_w (valid_object) (ei))
   {
-    munmap(ei->image, ei->size);
+    mi_munmap(ei->image, ei->size);
     return -1;
   }
 

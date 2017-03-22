@@ -56,6 +56,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 #include <string.h>
 #include <unistd.h>
 #include <sys/mman.h>
+#include <sys/syscall.h>   /* For SYS_xxx definitions */
 
 #if defined(HAVE_ELF_H)
 # include <elf.h>
@@ -353,5 +354,12 @@ static inline void invalidate_edi (struct elf_dyn_info *edi)
 #endif
 
 #define UNW_ALIGN(x,a) (((x)+(a)-1UL)&~((a)-1UL))
+
+/* Provide an internal syscall version of munmap to improve signal safety. */
+static ALWAYS_INLINE int
+mi_munmap (void *addr, size_t len)
+{
+  return syscall (SYS_munmap, addr, len);
+}
 
 #endif /* libunwind_i_h */
