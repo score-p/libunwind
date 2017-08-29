@@ -97,6 +97,7 @@ struct unw_addr_space
     int big_endian;
     int abi;    /* abi < 0 => unknown, 0 => SysV, 1 => HP-UX, 2 => Windows */
     unw_caching_policy_t caching_policy;
+    unw_iterate_phdr_func_t iterate_phdr_function;
 #ifdef HAVE_ATOMIC_OPS_H
     AO_t cache_generation;
 #else

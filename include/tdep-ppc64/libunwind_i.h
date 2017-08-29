@@ -54,6 +54,7 @@ struct unw_addr_space
   int big_endian;
   ppc64_abi_t abi;
   unw_caching_policy_t caching_policy;
+  unw_iterate_phdr_func_t iterate_phdr_function;
 #ifdef HAVE_ATOMIC_OPS_H
   AO_t cache_generation;
 #else
