@@ -98,6 +98,7 @@ struct unw_addr_space
     int big_endian;
     int abi;    /* abi < 0 => unknown, 0 => SysV, 1 => HP-UX, 2 => Windows */
     unw_caching_policy_t caching_policy;
+    unw_iterate_phdr_func_t iterate_phdr_function;
     _Atomic uint32_t cache_generation;
     unw_word_t dyn_generation;
     unw_word_t dyn_info_list_addr;      /* (cached) dyn_info_list_addr */

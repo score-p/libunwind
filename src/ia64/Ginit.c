@@ -363,6 +363,7 @@ ia64_local_addr_space_init (void)
   local_addr_space.abi = ABI_HPUX;
 #endif
   local_addr_space.caching_policy = UNWI_DEFAULT_CACHING_POLICY;
+  local_addr_space.iterate_phdr_function = dl_iterate_phdr;
   local_addr_space.acc.find_proc_info = tdep_find_proc_info;
   local_addr_space.acc.put_unwind_info = put_unwind_info;
   local_addr_space.acc.get_dyn_info_list_addr = get_dyn_info_list_addr;
