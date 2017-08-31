@@ -53,7 +53,7 @@ x86_64_local_resume (unw_addr_space_t as, unw_cursor_t *cursor, void *arg)
     {
       Debug (8, "resuming at ip=%llx via setcontext()\n",
              (unsigned long long) c->dwarf.ip);
-      setcontext (uc);
+      x86_64_setcontext (uc);
     }
   return -UNW_EINVAL;
 }

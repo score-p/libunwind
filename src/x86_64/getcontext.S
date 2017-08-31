@@ -26,6 +26,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 
 #include "ucontext_i.h"
 
+#define _Ux86_64_getcontext       UNW_ARCH_OBJ(getcontext)
+#define _Ux86_64_getcontext_trace UNW_ARCH_OBJ(getcontext_trace)
+
 /*  int _Ux86_64_getcontext (ucontext_t *ucp)
 
   Saves the machine context in UCP necessary for libunwind.  

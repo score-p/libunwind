@@ -57,6 +57,8 @@ the following rules should be followed in declaring these structures:
  (4) Don't declare members with enumeration types.  Declare them as
      int32_t instead.  */
 
+#include "libunwind-obj.h"
+
 typedef enum
   {
     UNW_DYN_STOP = 0,           /* end-of-unwind-info marker */
@@ -167,10 +169,12 @@ unw_dyn_info_list_t;
 
 /* Register the unwind info for a single procedure.
    This routine is NOT signal-safe.  */
+#define _U_dyn_register UNW_PASTE(UNW_SYMPREFIX, _dyn_register)
 extern void _U_dyn_register (unw_dyn_info_t *);
 
 /* Cancel the unwind info for a single procedure.
    This routine is NOT signal-safe.  */
+#define _U_dyn_cancel UNW_PASTE(UNW_SYMPREFIX, _dyn_cancel)
 extern void _U_dyn_cancel (unw_dyn_info_t *);
 
 

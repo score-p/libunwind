@@ -37,6 +37,20 @@ extern "C" {
    aren't really part of the libunwind API.  They are implemented in a
    archive library called libunwind-ptrace.a.  */
 
+#define UPT_OBJ(fn)	UNW_PASTE(UNW_PASTE(UNW_SYMPREFIX, PT_),fn)
+
+#define _UPT_create			UPT_OBJ(create)
+#define _UPT_destroy			UPT_OBJ(destroy)
+#define _UPT_find_proc_info		UPT_OBJ(find_proc_info)
+#define _UPT_put_unwind_info		UPT_OBJ(put_unwind_info)
+#define _UPT_get_dyn_info_list_addr	UPT_OBJ(get_dyn_info_list_addr)
+#define _UPT_access_mem			UPT_OBJ(access_mem)
+#define _UPT_access_reg			UPT_OBJ(access_reg)
+#define _UPT_access_fpreg		UPT_OBJ(access_fpreg)
+#define _UPT_get_proc_name		UPT_OBJ(get_proc_name)
+#define _UPT_resume			UPT_OBJ(resume)
+#define _UPT_accessors			UPT_OBJ(accessors)
+
 extern void *_UPT_create (pid_t);
 extern void _UPT_destroy (void *);
 extern int _UPT_find_proc_info (unw_addr_space_t, unw_word_t,

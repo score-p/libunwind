@@ -47,9 +47,6 @@ extern "C" {
 # define UNW_GENERIC_ONLY
 #endif
 
-#define UNW_TARGET      ia64
-#define UNW_TARGET_IA64 1
-
 #define _U_TDEP_QP_TRUE 0       /* see libunwind-dynamic.h  */
 
 /* This needs to be big enough to accommodate "struct cursor", while

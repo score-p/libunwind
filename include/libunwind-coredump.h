@@ -37,6 +37,26 @@ extern "C" {
 
 struct UCD_info;
 
+#define UCD_OBJ(fn)	UNW_PASTE(UNW_PASTE(UNW_SYMPREFIX, CD_),fn)
+
+#define _UCD_create				UCD_OBJ(create)
+#define _UCD_destroy				UCD_OBJ(destroy)
+#define _UCD_get_num_threads			UCD_OBJ(get_num_threads)
+#define _UCD_select_thread			UCD_OBJ(select_thread)
+#define _UCD_get_pid				UCD_OBJ(get_pid)
+#define _UCD_get_cursig				UCD_OBJ(get_cursig)
+#define _UCD_add_backing_file_at_segment	UCD_OBJ(add_backing_file_at_segment)
+#define _UCD_add_backing_file_at_vaddr		UCD_OBJ(add_backing_file_at_vaddr)
+#define _UCD_find_proc_info			UCD_OBJ(find_proc_info)
+#define _UCD_put_unwind_info			UCD_OBJ(put_unwind_info)
+#define _UCD_get_dyn_info_list_addr		UCD_OBJ(get_dyn_info_list_addr)
+#define _UCD_access_mem				UCD_OBJ(access_mem)
+#define _UCD_access_reg				UCD_OBJ(access_reg)
+#define _UCD_access_fpreg			UCD_OBJ(access_fpreg)
+#define _UCD_get_proc_name			UCD_OBJ(get_proc_name)
+#define _UCD_resume				UCD_OBJ(resume)
+#define _UCD_accessors				UCD_OBJ(accessors)
+
 extern struct UCD_info *_UCD_create(const char *filename);
 extern void _UCD_destroy(struct UCD_info *);
 

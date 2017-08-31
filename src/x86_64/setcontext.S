@@ -26,6 +26,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 
 #include "ucontext_i.h"
 
+#define _Ux86_64_setcontext UNW_ARCH_OBJ(setcontext)
+
 /*  int _Ux86_64_setcontext (const ucontext_t *ucp)
 
   Restores the machine context provided.

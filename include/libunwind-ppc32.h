@@ -39,9 +39,6 @@ extern "C" {
 #include <inttypes.h>
 #include <ucontext.h>
 
-#define UNW_TARGET              ppc32
-#define UNW_TARGET_PPC32        1
-
 #define _U_TDEP_QP_TRUE 0       /* see libunwind-dynamic.h  */
 
 /*

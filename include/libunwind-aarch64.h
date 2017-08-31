@@ -35,9 +35,6 @@ extern "C" {
 #include <stddef.h>
 #include <ucontext.h>
 
-#define UNW_TARGET      aarch64
-#define UNW_TARGET_AARCH64      1
-
 #define _U_TDEP_QP_TRUE 0       /* see libunwind-dynamic.h  */
 
 /* This needs to be big enough to accommodate "struct cursor", while

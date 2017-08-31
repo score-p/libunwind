@@ -36,9 +36,6 @@ extern "C" {
 # undef mips
 #endif
 
-#define UNW_TARGET      mips
-#define UNW_TARGET_MIPS 1
-
 #define _U_TDEP_QP_TRUE 0       /* see libunwind-dynamic.h  */
 
 /* This needs to be big enough to accommodate "struct cursor", while

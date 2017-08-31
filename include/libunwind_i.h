@@ -171,7 +171,7 @@ cmpxchg_ptr (void *addr, void *old, void *new)
 #define atomic_read(ptr)        (*(ptr))
 
 #define UNWI_OBJ(fn)      UNW_PASTE(UNW_PREFIX,UNW_PASTE(I,fn))
-#define UNWI_ARCH_OBJ(fn) UNW_PASTE(UNW_PASTE(UNW_PASTE(_UI,UNW_TARGET),_), fn)
+#define UNWI_ARCH_OBJ(fn) UNW_PASTE(UNW_PASTE(UNW_PASTE(UNW_PASTE(UNW_SYMPREFIX,I),UNW_TARGET),_), fn)
 
 #define unwi_full_mask    UNWI_ARCH_OBJ(full_mask)
 
@@ -270,7 +270,9 @@ extern void unwi_dyn_remote_put_unwind_info (unw_addr_space_t as,
                                              void *arg);
 extern int unwi_dyn_validate_cache (unw_addr_space_t as, void *arg);
 
+#define _U_dyn_info_list UNW_PASTE(UNW_SYMPREFIX, _dyn_info_list)
 extern unw_dyn_info_list_t _U_dyn_info_list;
+#define _U_dyn_info_list_lock UNW_PASTE(UNW_SYMPREFIX, _dyn_info_list_lock)
 extern pthread_mutex_t _U_dyn_info_list_lock;
 
 #if UNW_DEBUG
@@ -304,6 +306,7 @@ print_error (const char *string)
 #define mi_init         UNWI_ARCH_OBJ(mi_init)
 
 extern void mi_init (void);     /* machine-independent initializations */
+#define _U_dyn_info_list_addr UNW_PASTE(UNW_SYMPREFIX, _dyn_info_list_addr)
 extern unw_word_t _U_dyn_info_list_addr (void);
 
 /* This is needed/used by ELF targets only.  */

@@ -216,9 +216,6 @@ dwarf_cfa_t;
 #define DW_EH_PE_funcrel        0x40    /* start-of-procedure-relative */
 #define DW_EH_PE_aligned        0x50    /* aligned pointer */
 
-extern struct mempool dwarf_reg_state_pool;
-extern struct mempool dwarf_cie_info_pool;
-
 typedef enum
   {
     DWARF_WHERE_UNDEF,          /* register isn't saved at all */
@@ -377,7 +374,7 @@ struct unw_debug_frame_list
   };
 
 /* Convenience macros: */
-#define dwarf_init                      UNW_ARCH_OBJ(dwarf_init)
+#define dwarf_init                      UNW_OBJ(dwarf_init)
 #define dwarf_callback                  UNW_OBJ(dwarf_callback)
 #define dwarf_find_proc_info            UNW_OBJ(dwarf_find_proc_info)
 #define dwarf_find_debug_frame          UNW_OBJ(dwarf_find_debug_frame)
@@ -396,6 +393,11 @@ struct unw_debug_frame_list
 #define dwarf_read_encoded_pointer      UNW_OBJ(dwarf_read_encoded_pointer)
 #define dwarf_step                      UNW_OBJ(dwarf_step)
 #define dwarf_flush_rs_cache            UNW_OBJ(dwarf_flush_rs_cache)
+#define dwarf_reg_state_pool            UNW_OBJ(dwarf_reg_state_pool)
+#define dwarf_cie_info_pool             UNW_OBJ(dwarf_cie_info_pool)
+
+extern struct mempool dwarf_reg_state_pool;
+extern struct mempool dwarf_cie_info_pool;
 
 extern int dwarf_init (void);
 #ifndef UNW_REMOTE_ONLY

@@ -32,9 +32,6 @@ extern "C" {
 #include <inttypes.h>
 #include <stddef.h>
 
-#define UNW_TARGET      arm
-#define UNW_TARGET_ARM  1
-
 #define _U_TDEP_QP_TRUE 0       /* see libunwind-dynamic.h  */
 
 /* This needs to be big enough to accommodate "struct cursor", while

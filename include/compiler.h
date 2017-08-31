@@ -36,8 +36,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 # define UNUSED         __attribute__((unused))
 # define NOINLINE       __attribute__((noinline))
 # define NORETURN       __attribute__((noreturn))
-# define ALIAS2(name)   #name
-# define ALIAS(name)    __attribute__((alias (ALIAS2(name))))
+# define ALIAS_(name)   __attribute__((alias (#name)))
+# define ALIAS(name)    ALIAS_(name)
 # if (__GNUC__ > 3) || (__GNUC__ == 3 && __GNUC_MINOR__ > 2)
 #  define ALWAYS_INLINE inline __attribute__((always_inline))
 #  define HIDDEN        __attribute__((visibility ("hidden")))
@@ -66,6 +66,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 # define likely(x)      (x)
 # define unlikely(x)    (x)
 #endif
+
+#define STRINGIFY_(string) #string
+#define STRINGIFY(string)  STRINGIFY_(string)
+#define PRAGMA_(pragma)    _Pragma(STRINGIFY(pragma))
+#define PRAGMA(pragma)     PRAGMA_(pragma)
 
 #define ARRAY_SIZE(a)   (sizeof (a) / sizeof ((a)[0]))
 

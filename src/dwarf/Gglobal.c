@@ -1,5 +1,5 @@
 /* libunwind - a platform-independent unwind library
-   Copyright (C) 2003, 2005 Hewlett-Packard Co
+   Copyright (c) 2003-2004 Hewlett-Packard Development Company, L.P.
         Contributed by David Mosberger-Tang <davidm@hpl.hp.com>
 
 This file is part of libunwind.
@@ -23,38 +23,15 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 
-#ifndef _UPT_internal_h
-#define _UPT_internal_h
+#include "dwarf_i.h"
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
+HIDDEN struct mempool dwarf_reg_state_pool = {0,};
+HIDDEN struct mempool dwarf_cie_info_pool = {0,};
 
-#ifdef HAVE_SYS_TYPES_H
-#include <sys/types.h>
-#endif
-#ifdef HAVE_SYS_PTRACE_H
-#include <sys/ptrace.h>
-#endif
-#ifdef HAVE_SYS_PROCFS_H
-#include <sys/procfs.h>
-#endif
-
-#include <errno.h>
-#include <libunwind-ptrace.h>
-#include <limits.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-#include "libunwind_i.h"
-
-struct UPT_info
-  {
-    pid_t pid;          /* the process-id of the child we're unwinding */
-    struct elf_dyn_info edi;
-  };
-
-#define _UPT_reg_offset UPT_OBJ(reg_offset)
-extern const int _UPT_reg_offset[UNW_REG_LAST + 1];
-
-#endif /* _UPT_internal_h */
+HIDDEN int
+dwarf_init (void)
+{
+  mempool_init (&dwarf_reg_state_pool, sizeof (dwarf_stackable_reg_state_t), 0);
+  mempool_init (&dwarf_cie_info_pool, sizeof (struct dwarf_cie_info), 0);
+  return 0;
+}

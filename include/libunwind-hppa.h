@@ -32,9 +32,6 @@ extern "C" {
 #include <inttypes.h>
 #include <ucontext.h>
 
-#define UNW_TARGET      hppa
-#define UNW_TARGET_HPPA 1
-
 #define _U_TDEP_QP_TRUE 0       /* see libunwind-dynamic.h  */
 
 /* This needs to be big enough to accommodate "struct cursor", while

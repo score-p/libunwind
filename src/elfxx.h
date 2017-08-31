@@ -37,11 +37,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 #if ELF_CLASS == ELFCLASS32
 # define ELF_W(x)       ELF32_##x
 # define Elf_W(x)       Elf32_##x
-# define elf_w(fn)      UNW_PASTE(_Uelf32_, fn)
+# define elf_w(fn)      UNW_PASTE(UNW_PASTE(UNW_SYMPREFIX,elf32_), fn)
 #else
 # define ELF_W(x)       ELF64_##x
 # define Elf_W(x)       Elf64_##x
-# define elf_w(fn)      UNW_PASTE(_Uelf64_, fn)
+# define elf_w(fn)      UNW_PASTE(UNW_PASTE(UNW_SYMPREFIX,elf64_), fn)
 #endif
 
 extern int elf_w (get_proc_name) (unw_addr_space_t as,
