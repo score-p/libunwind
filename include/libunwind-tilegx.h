@@ -33,9 +33,6 @@ extern "C" {
 #include <inttypes.h>
 #include <ucontext.h>
 
-#define UNW_TARGET           tilegx
-#define UNW_TARGET_TILEGX    1
-
 #define _U_TDEP_QP_TRUE        0    /* see libunwind-dynamic.h  */
 
 /* This needs to be big enough to accommodate "struct cursor", while

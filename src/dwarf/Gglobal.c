@@ -25,8 +25,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 
 #include "dwarf_i.h"
 
-HIDDEN struct mempool dwarf_reg_state_pool;
-HIDDEN struct mempool dwarf_cie_info_pool;
+HIDDEN struct mempool dwarf_reg_state_pool = {0,};
+HIDDEN struct mempool dwarf_cie_info_pool = {0,};
 
 HIDDEN int
 dwarf_init (void)

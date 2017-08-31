@@ -52,7 +52,8 @@ libunwind_headers += include/unwind.h
 endif
 endif
 
-nodist_libunwind_headers = include/libunwind-common.h
+nodist_libunwind_headers = include/libunwind-common.h \
+	include/libunwind-obj.h
 
 if !EMBEDDED
 include_HEADERS        = $(libunwind_headers)
@@ -100,7 +101,8 @@ noinst_HEADERS = include/dwarf.h include/dwarf_i.h include/dwarf-eh.h	\
 	include/tdep/libunwind_i.h					\
 	include/tdep/jmpbuf.h include/tdep/dwarf-config.h
 
-EXTRA_DIST = include/libunwind-common.h.in
+EXTRA_DIST = include/libunwind-common.h.in \
+	include/libunwind-obj.h.in
 
 MAINTAINERCLEANFILES = \
 	Makefile.in \

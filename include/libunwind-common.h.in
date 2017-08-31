@@ -23,6 +23,9 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 
+#ifndef libunwind_common_h
+#define libunwind_common_h
+
 #define UNW_VERSION_MAJOR	@PKG_MAJOR@
 #define UNW_VERSION_MINOR	@PKG_MINOR@
 #define UNW_VERSION_EXTRA	@PKG_EXTRA@
@@ -30,29 +33,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 #define UNW_VERSION_CODE(maj,min)	(((maj) << 16) | (min))
 #define UNW_VERSION	UNW_VERSION_CODE(UNW_VERSION_MAJOR, UNW_VERSION_MINOR)
 
-#ifdef __sun
-// On SmartOS, gcc fails with the following error:
-//
-// ../include/libunwind-common.h:43:41: error: expected identifier or '(' before numeric constant
-// # define UNW_PREFIX UNW_PASTE(UNW_PASTE(_U,UNW_TARGET),_)
-//                                         ^
-//
-// workaround is to undefine _U explicitly.
-// see https://github.com/libunwind/libunwind/issues/118 for more details.
-//
-#undef _U
-#endif
-
-#define UNW_PASTE2(x,y)	x##y
-#define UNW_PASTE(x,y)	UNW_PASTE2(x,y)
-#define UNW_OBJ(fn)	UNW_PASTE(UNW_PREFIX, fn)
-#define UNW_ARCH_OBJ(fn) UNW_PASTE(UNW_PASTE(UNW_PASTE(_U,UNW_TARGET),_), fn)
-
-#ifdef UNW_LOCAL_ONLY
-# define UNW_PREFIX	UNW_PASTE(UNW_PASTE(_UL,UNW_TARGET),_)
-#else /* !UNW_LOCAL_ONLY */
-# define UNW_PREFIX	UNW_PASTE(UNW_PASTE(_U,UNW_TARGET),_)
-#endif /* !UNW_LOCAL_ONLY */
+#include "libunwind-obj.h"
 
 
 /* Error codes.  The unwind routines return the *negated* values of
@@ -274,6 +255,9 @@ typedef int (*unw_iterate_phdr_func_t) (unw_iterate_phdr_callback_t callback, vo
 #define unw_regname		UNW_ARCH_OBJ(regname)
 #define unw_flush_cache		UNW_ARCH_OBJ(flush_cache)
 #define unw_strerror		UNW_ARCH_OBJ(strerror)
+#if UNW_HAVE_SYMBOL_PREFIX
+#define unw_backtrace		UNW_ARCH_OBJ(backtrace)
+#endif
 
 extern unw_addr_space_t unw_create_addr_space (unw_accessors_t *, int);
 extern void unw_destroy_addr_space (unw_addr_space_t);
@@ -306,3 +290,5 @@ extern const char *unw_strerror (int);
 extern int unw_backtrace (void **, int);
 
 extern unw_addr_space_t unw_local_addr_space;
+
+#endif /* libunwind_common_h */

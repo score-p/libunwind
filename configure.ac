@@ -167,6 +167,12 @@ AC_ARG_ENABLE([embedded],
 	      [],
 	      [enable_embedded=no])
 
+AC_ARG_WITH([symbol-prefix],
+	      [AS_HELP_STRING([--with-symbol-prefix=PREFIX],
+			      [Prefix all symbols with PREFIX.])
+	      ],
+	      [symbol_prefix=$withval])
+
 AC_MSG_CHECKING([for build architecture])
 AC_MSG_RESULT([$build_arch])
 AC_MSG_CHECKING([for host architecture])
@@ -451,6 +457,12 @@ AC_SUBST(BACKTRACELIB)
 
 AM_CONDITIONAL([EMBEDDED], [test "x$enable_embedded" = xyes])
 
+AS_IF([test "x$symbol_prefix" != x],
+      [HAVE_SYMBOL_PREFIX=1],
+      [HAVE_SYMBOL_PREFIX=0])
+AC_SUBST([HAVE_SYMBOL_PREFIX])
+AC_SUBST([symbol_prefix])
+
 AC_PATH_PROG([LATEX2MAN],[latex2man])
 if test "x$LATEX2MAN" = "x"; then
   AC_MSG_WARN([latex2man not found. Install latex2man. Disabling docs.])
@@ -477,6 +489,7 @@ AM_COND_IF([CONFIG_WEAK_BACKTRACE], [
 
 AC_CONFIG_FILES(Makefile src/Makefile
                 include/libunwind-common.h
+                include/libunwind-obj.h
                 include/libunwind.h include/tdep/libunwind_i.h)
 AM_COND_IF([EMBEDDED], [], [
     AC_CONFIG_FILES([src/unwind/libunwind.pc src/libunwind-generic.pc])

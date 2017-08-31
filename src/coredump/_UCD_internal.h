@@ -97,6 +97,7 @@ struct UCD_info
     struct elf_dyn_info edi;
   };
 
+#define _UCD_get_elf_image	UCD_OBJ(get_elf_image)
 extern coredump_phdr_t * _UCD_get_elf_image(struct UCD_info *ui, unw_word_t ip);
 
 #define STRUCT_MEMBER_P(struct_p, struct_offset) ((void *) ((char*) (struct_p) + (long) (struct_offset)))

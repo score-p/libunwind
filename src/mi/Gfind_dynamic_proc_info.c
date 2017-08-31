@@ -44,7 +44,7 @@ local_find_proc_info (unw_addr_space_t as, unw_word_t ip, unw_proc_info_t *pi,
   unw_dyn_info_t *di;
 
 #ifndef UNW_LOCAL_ONLY
-# pragma weak _U_dyn_info_list_addr
+  PRAGMA(weak _U_dyn_info_list_addr)
   if (!_U_dyn_info_list_addr)
     return -UNW_ENOINFO;
 #endif
