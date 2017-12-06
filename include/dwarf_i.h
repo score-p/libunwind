@@ -46,72 +46,115 @@ static inline int
 dwarf_reads8 (unw_addr_space_t as, unw_accessors_t *a, unw_word_t *addr,
               int8_t *val, void *arg)
 {
-  dwarf_misaligned_value_t *mvp = (void *) (uintptr_t) *addr;
+  int ret = 0;
+  unw_word_t value;
+  if ((ret = a->access_mem(as, *addr, &value, 0, NULL)) < 0)
+      return ret;
 
-  *val = mvp->s8;
-  *addr += sizeof (mvp->s8);
-  return 0;
+  dwarf_misaligned_value_t mvp = (dwarf_misaligned_value_t)value;
+
+  *val = mvp.s8;
+  *addr += sizeof (mvp.s8);
+  return ret;
 }
 
 static inline int
 dwarf_reads16 (unw_addr_space_t as, unw_accessors_t *a, unw_word_t *addr,
                int16_t *val, void *arg)
 {
-  dwarf_misaligned_value_t *mvp = (void *) (uintptr_t) *addr;
+  int ret = 0;
+  unw_word_t value;
+  if ((ret = a->access_mem(as, *addr, &value, 0, NULL)) < 0)
+      return ret;
 
-  *val = mvp->s16;
-  *addr += sizeof (mvp->s16);
-  return 0;
+  dwarf_misaligned_value_t mvp = (dwarf_misaligned_value_t)value;
+
+  *val = mvp.s16;
+  *addr += sizeof (mvp.s16);
+  return ret;
 }
 
 static inline int
 dwarf_reads32 (unw_addr_space_t as, unw_accessors_t *a, unw_word_t *addr,
                int32_t *val, void *arg)
 {
-  dwarf_misaligned_value_t *mvp = (void *) (uintptr_t) *addr;
+  int ret = 0;
+  unw_word_t value;
+  if ((ret = a->access_mem(as, *addr, &value, 0, NULL)) < 0)
+      return ret;
 
-  *val = mvp->s32;
-  *addr += sizeof (mvp->s32);
-  return 0;
+  dwarf_misaligned_value_t mvp = (dwarf_misaligned_value_t)value;
+
+  *val = mvp.s32;
+  *addr += sizeof (mvp.s32);
+  return ret;
 }
 
 static inline int
 dwarf_reads64 (unw_addr_space_t as, unw_accessors_t *a, unw_word_t *addr,
                int64_t *val, void *arg)
 {
-  dwarf_misaligned_value_t *mvp = (void *) (uintptr_t) *addr;
+  int ret = 0;
+  unw_word_t value;
+  if ((ret = a->access_mem(as, *addr, &value, 0, NULL)) < 0)
+      return ret;
 
-  *val = mvp->s64;
-  *addr += sizeof (mvp->s64);
-  return 0;
+  dwarf_misaligned_value_t mvp = (dwarf_misaligned_value_t)value;
+
+  *val = mvp.s64;
+  *addr += sizeof (mvp.s64);
+  return ret;
 }
 
 static inline int
 dwarf_readu8 (unw_addr_space_t as, unw_accessors_t *a, unw_word_t *addr,
               uint8_t *val, void *arg)
 {
-  dwarf_misaligned_value_t *mvp = (void *) (uintptr_t) *addr;
+  int ret = 0;
+  unw_word_t value;
+  if ((ret = a->access_mem(as, *addr, &value, 0, NULL)) < 0)
+      return ret;
 
-  *val = mvp->u8;
-  *addr += sizeof (mvp->u8);
-  return 0;
+  dwarf_misaligned_value_t mvp = (dwarf_misaligned_value_t)value;
+
+  *val = mvp.u8;
+  *addr += sizeof (mvp.u8);
+  return ret;
 }
 
 static inline int
 dwarf_readu16 (unw_addr_space_t as, unw_accessors_t *a, unw_word_t *addr,
                uint16_t *val, void *arg)
 {
-  dwarf_misaligned_value_t *mvp = (void *) (uintptr_t) *addr;
+  int ret = 0;
+  unw_word_t value;
+  if ((ret = a->access_mem(as, *addr, &value, 0, NULL)) < 0)
+      return ret;
 
-  *val = mvp->u16;
-  *addr += sizeof (mvp->u16);
-  return 0;
+  dwarf_misaligned_value_t mvp = (dwarf_misaligned_value_t)value;
+
+  *val = mvp.u16;
+  *addr += sizeof (mvp.u16);
+  return ret;
 }
 
 static inline int
 dwarf_readu32 (unw_addr_space_t as, unw_accessors_t *a, unw_word_t *addr,
                uint32_t *val, void *arg)
 {
+  /* On HLRS HazelHen:
+   * Fatal: Bug 'instrumentedRegionHandle': Could not resolve unhandled wrappers for enter event.
+   *
+   * ...
+   * #7 in MPI_Init (argc=0x7fffffff5cc0, argv=<optimized out>)
+   * #8 in main ()
+   *
+   * int ret = 0;
+   * unw_word_t value;
+   * if ((ret = a->access_mem(as, *addr, &value, 0, NULL)) < 0)
+   *     return ret;
+   */
+
   dwarf_misaligned_value_t *mvp = (void *) (uintptr_t) *addr;
 
   *val = mvp->u32;
@@ -123,11 +166,16 @@ static inline int
 dwarf_readu64 (unw_addr_space_t as, unw_accessors_t *a, unw_word_t *addr,
                uint64_t *val, void *arg)
 {
-  dwarf_misaligned_value_t *mvp = (void *) (uintptr_t) *addr;
+  int ret = 0;
+  unw_word_t value;
+  if ((ret = a->access_mem(as, *addr, &value, 0, NULL)) < 0)
+      return ret;
 
-  *val = mvp->u64;
-  *addr += sizeof (mvp->u64);
-  return 0;
+  dwarf_misaligned_value_t mvp = (dwarf_misaligned_value_t)value;
+
+  *val = mvp.u64;
+  *addr += sizeof (mvp.u64);
+  return ret;
 }
 
 #else /* !UNW_LOCAL_ONLY */
